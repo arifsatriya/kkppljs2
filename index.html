@@ -7,123 +7,147 @@
           "width=device-width, initial-scale=1.0">
     <title>Popup Form</title>
     <style>
-       
-/* Pengaturan halaman */
+  /* Pengaturan halaman dengan background gradasi modern */
 body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: Arial, sans-serif;
-    background: #f0f0f0;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  color: #2d3748;
 }
 
-/* Tombol */
+/* Base Tombol dengan efek klik yang tactile */
 button {
-    padding: 12px 24px;
-    border: none;
-    border-radius: 8px;
-    color: white;
-    cursor: pointer;
-    transition: 0.3s;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.btn-open-popup,
-.btn-submit {
-    background: green;
+button:active {
+  transform: scale(0.96);
+}
+
+/* Tombol Aksi Utama (Gaya Kekinian: Bold & Vibrant) */
+.btn-open-popup, .btn-submit {
+  background: #10b981; /* Hijau Emerald modern */
+  color: white;
+  box-shadow: 0 4px 14px 0 rgba(16, 185, 129, 0.3);
 }
 
 .btn-open-popup {
-    font-size: 18px;
+  font-size: 16px;
+  letter-spacing: 0.5px;
 }
 
-.btn-open-popup:hover,
-.btn-submit:hover {
-    background: #4caf50;
+.btn-open-popup:hover, .btn-submit:hover {
+  background: #059669;
+  box-shadow: 0 6px 20px 0 rgba(5, 150, 105, 0.4);
+  transform: translateY(-2px);
 }
 
-/* Overlay popup */
+/* Overlay popup dengan efek blur (Glassmorphism) */
 .overlay-container {
-    display: none;
-    position: fixed;
-    inset: 0;
-    justify-content: center;
-    align-items: center;
-    background: rgba(0, 0, 0, 0.6);
-    opacity: 0;
-    transition: opacity 0.3s;
+  display: none;
+  position: fixed;
+  inset: 0;
+  justify-content: center;
+  align-items: center;
+  background: rgba(15, 23, 42, 0.3); /* Gelap transparan */
+  backdrop-filter: blur(8px); /* Efek blur kaca di belakangnya */
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .overlay-container.show {
-    display: flex;
-    opacity: 1;
+  display: flex;
+  opacity: 1;
 }
 
-/* Kotak popup */
+/* Kotak popup dengan Shadow Lembut & Struktur Clean */
 .popup-box {
-    width: 320px;
-    padding: 24px;
-    border-radius: 12px;
-    background: white;
-    text-align: center;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
-    animation: fadeInUp 0.5s ease-out;
+  width: 340px;
+  padding: 32px;
+  border-radius: 24px; /* Sudut lebih melengkung agar ramah di mata */
+  background: #ffffff;
+  text-align: center;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  animation: cubicBezierUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); /* Efek pop sedikit memantul */
 }
 
 .popup-box h2 {
-    color: green;
+  color: #0f172a;
+  font-size: 24px;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 8px;
 }
 
 /* Form */
 .form-container {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
 }
 
 .form-label {
-    margin-bottom: 10px;
-    color: #444;
-    text-align: left;
+  margin-bottom: 6px;
+  color: #475569;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
 }
 
+/* Input Minimalis dengan Fokus Outline yang Berwarna */
 .form-input {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 15px;
+  color: #1e293b;
+  background-color: #f8fafc;
+  transition: all 0.2s ease;
 }
 
-/* Tombol submit dan close */
-.btn-submit,
-.btn-close-popup {
-    padding: 12px 24px;
+.form-input:focus {
+  outline: none;
+  border-color: #10b981;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.15);
 }
 
+/* Tombol Batal / Tutup */
 .btn-close-popup {
-    margin-top: 12px;
-    background: #e74c3c;
+  margin-top: 12px;
+  background: #f1f5f9; /* Menggunakan warna netral sekunder, bukan merah menyala */
+  color: #64748b;
 }
 
 .btn-close-popup:hover {
-    background: #c0392b;
+  background: #e2e8f0;
+  color: #334155;
 }
 
-/* Animasi popup */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/* Animasi popup dengan kurva smooth */
+@keyframes cubicBezierUp {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 
     </style>
